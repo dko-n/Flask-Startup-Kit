@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{% endblock  %}
+
+{% block head %}
+    {{ super() }}
+{% endblock  %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="{{ url_for('index') }}" class="navbar-brand">Flask-StartUp-Kit!!!</a>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navmenu"
+                aria-controls="navmenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                <a class="nav-item nav-link" href="{{ url_for('signin') }}">SignIn</a>
+                <a class="nav-item nav-link" href="{{ url_for('signup') }}">SignUp</a>
+                <a class="nav-item nav-link" href="{{ url_for('signout') }}">SignOut</a>
+                {% if username %}
+                    <span class="navbar-text">{{ username }}</span>
+                {% else %}
+                    <span class="navbar-text">Guest</span>
+                {% endif  %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+<div class="container-fruid">
+<div class="jumbotron bg-light">
+    <h1 class="display-3">Flask-StartUp-Kit</h1>
+    {% if username %}
+        <p class="lead">Welcome {{ username }}-San. This is a simple startup kit for Flask.</p>
+    {% else %}
+        <p class="lead">Welcome Guest User. This is a simple startup kit for Flask.</p>
+    {% endif  %}
+    
+    <hr class="my-4">
+    
+    <div class="container">
+        <h1 class="display-">SignUp Form</h1>
+        <form class="form-group" action="{{ url_for('signup') }}" method="POST">
+        <label for="Name">Name:</label>
+        <input type="text" name="name" class="form-control">
+        <label for="Password">Password:</label>
+        <input type="password" name="password" class="form-control">
+        <div class="mb-3"></div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="text-danger">{{ message }}<p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <button type="submit" class="btn btn-dark">SignUp</button>
+    </form>
+    </div>
+
+</div>
+</div>
+{% endblock  %}
+
+{% block scripts %}
+{% endblock  %}

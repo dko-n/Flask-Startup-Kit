@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{% endblock  %}
+
+{% block head %}
+    {{ super() }}
+{% endblock  %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="{{ url_for('index') }}" class="navbar-brand">Flask-StartUp-Kit!!!</a>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navmenu"
+                aria-controls="navmenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                <a class="nav-item nav-link" href="{{ url_for('signin') }}">SignIn</a>
+                <a class="nav-item nav-link" href="{{ url_for('signup') }}">SignUp</a>
+                <a class="nav-item nav-link" href="{{ url_for('signout') }}">SignOut</a>
+                {% if username %}
+                    <span class="navbar-text">{{ username }}</span>
+                {% else %}
+                    <span class="navbar-text">Guest</span>
+                {% endif  %}
+            </div>
+        </div>
+    </nav>
+{% endblock  %}
+
+{% block content %}
+<div class="container-fruid">
+<div class="jumbotron bg-light">
+    <h1 class="display-3">Flask-StartUp-Kit</h1>
+    {% if username %}
+        <p class="lead">Welcome {{ username }}-San. This is a simple startup kit for Flask.</p>
+    {% else %}
+        <p class="lead">Welcome Guest User. This is a simple startup kit for Flask.</p>
+    {% endif  %}
+    <hr class="my-4">
+    
+    <h1 class="display-">About</h1>
+    <p class="lead">
+        Flask is a simple and very flexible Web Application Framework.
+        So, I created a sample application with the minimum required configuration for Web Application.
+    </p>
+</div>
+</div>
+{% endblock  %}
+
+{% block scripts %}
+{% endblock  %}

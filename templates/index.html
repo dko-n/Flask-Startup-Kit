@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{% endblock  %}
+
+{% block head %}
+    {{ super() }}
+{% endblock  %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="{{ url_for('index') }}" class="navbar-brand">Flask-StartUp-Kit!!!</a>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navmenu"
+                aria-controls="navmenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                <a class="nav-item nav-link" href="{{ url_for('signin') }}">SignIn</a>
+                <a class="nav-item nav-link" href="{{ url_for('signup') }}">SignUp</a>
+                <a class="nav-item nav-link" href="{{ url_for('signout') }}">SignOut</a>
+                {% if username %}
+                    <span class="navbar-text">{{ username }}</span>
+                {% else %}
+                    <span class="navbar-text">Guest</span>
+                {% endif  %}
+            </div>
+        </div>
+    </nav>
+{% endblock  %}
+
+{% block content %}
+<div class="container-fruid">
+<div class="jumbotron bg-light">
+    <h1 class="display-3">Flask-StartUp-Kit</h1>
+    {% if username %}
+        <p class="lead">Welcome {{ username }}-San. This is a simple startup kit for Flask.</p>
+    {% else %}
+        <p class="lead">Welcome Guest User. This is a simple startup kit for Flask.</p>
+    {% endif  %}
+    
+    <hr class="my-4">
+    
+    <h1 class="display-">Environment</h1>
+    <ul class="list-group">
+        <li class="list-group-item">Python ver {{ python_ver }}</li>
+        <li class="list-group-item">Flask ver {{ flask_ver }}</li>
+        <li class="list-group-item">SQLAlchemy ver {{ sql_alchemy_ver }}</li>
+        {% if database_info %}
+            <li class="list-group-item text-success">{{ database_info.database }}</li>
+            <li class="list-group-item">Default UserName/Password is {{ user_info.name }}/{{ user_info.password }}</li>
+        {% else %}
+            <li class="list-group-item text-danger">Database is not Ready!!!</li>
+        {% endif  %}
+    </ul>
+
+</div>
+</div>
+{% endblock  %}
+
+{% block scripts %}
+{% endblock  %}

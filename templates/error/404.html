@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{% endblock  %}
+
+{% block head %}
+    {{ super() }}
+{% endblock  %}
+
+{% block navbar %}
+    <nav class="uk-navbar uk-background-secondary uk-light">
+        <div class="uk-navbar-left uk-navbar-item uk-logo"><a href="{{ url_for('index') }}">Flask-StartUp-Kit!!!</a></div>
+        <ul class="uk-navbar-right">
+            <li class="uk-navbar-item"><a class="" href="{{ url_for('about') }}">About</a></li>
+            <li class="uk-navbar-item"><a class="" href="{{ url_for('signin') }}">SignIn</a></li>
+            <li class="uk-navbar-item"><a class="" href="{{ url_for('signup') }}">SignUp</a></li>
+        </ul>
+    </nav>
+{% endblock  %}
+
+{% block content %}
+<div class="uk-container-expand">
+    <h2 class="uk-text-bold uk-text-center uk-position-center">{{ status_code }} | {{ error_msg }} </h2>
+</div>
+{% endblock  %}
+
+{% block scripts %}
+{% endblock  %}
