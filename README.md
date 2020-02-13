@@ -1,5 +1,5 @@
 # 🧪Flask-StartUp-Kit
-* Flaskは自由な構成が可能なWeb Application Frameworkなので、PJを始めるに当たり必要最小限の構成を持ったひな型があると便利だと思い作成いたしました。
+Flaskは自由な構成が可能なWeb Application Frameworkなので、PJを始めるに当たり必要最小限の構成を持ったひな型があると便利だと思い作成いたしました。
 
 ![main](https://user-images.githubusercontent.com/13768156/74444176-cf2c7380-4eb7-11ea-8167-2cf2968694c1.png)
 
@@ -37,7 +37,7 @@
 ![loggedin](https://user-images.githubusercontent.com/13768156/74446482-4b748600-4ebb-11ea-93c4-863786fd1a89.png)
 
 # 📝Author
-* おんてゃん(⋈◍＞◡＜◍)。✧♡
+おんてゃん(⋈◍＞◡＜◍)。✧♡
 
 # 📖References
 * https://a2c.bitbucket.io/flask/
