@@ -1,3 +1,9 @@
+'''
+    name: database.py
+    description: Database file.
+    author: On Kato
+'''
+
 import os
 from pathlib import Path
 import importlib

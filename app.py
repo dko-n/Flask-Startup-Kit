@@ -1,3 +1,9 @@
+'''
+    name: app.py
+    description: Application file.
+    author: On Kato
+'''
+
 import sys
 import flask
 from flask import Flask, session, flash, render_template, abort, request, redirect, url_for
