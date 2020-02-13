@@ -22,3 +22,6 @@ SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}/{}?charset={}".format(
     DATABASE_CONFIG["DATABASE_NAME"], 
     DATABASE_CONFIG["CHARSET"]
 )
+
+# Model Files Directory Name
+MODEL_DIR = "models"

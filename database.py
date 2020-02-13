@@ -3,11 +3,11 @@ from pathlib import Path
 import importlib
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
-from config import SQLALCHEMY_DATABASE_URI
+from config import SQLALCHEMY_DATABASE_URI, MODEL_DIR
 
 URL = SQLALCHEMY_DATABASE_URI
 PJ_ROOT = Path().cwd()
-MODEL_DIR = "models"
+MODEL_DIR = MODEL_DIR
 MODELS_NAME = ["{0}.{1}".format(MODEL_DIR, model.stem) for model in Path().cwd().joinpath(MODEL_DIR).iterdir() if model.is_file()]
 
 class Database:
