@@ -3,8 +3,9 @@ from pathlib import Path
 import importlib
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
+from config import SQLALCHEMY_DATABASE_URI
 
-URL = 'mysql+pymysql://root:@localhost/flask?charset=utf8'
+URL = SQLALCHEMY_DATABASE_URI
 PJ_ROOT = Path().cwd()
 MODEL_DIR = "models"
 MODELS_NAME = ["{0}.{1}".format(MODEL_DIR, model.stem) for model in Path().cwd().joinpath(MODEL_DIR).iterdir() if model.is_file()]

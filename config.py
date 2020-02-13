@@ -9,8 +9,8 @@ DATABASE_CONFIG = {
     "USER" : "root",
     "PASSWORD" : "",
     "HOST": "localhost",
-    "DATABASE_NAME" : "test",
-    "CHARSET" : "utf-8"
+    "DATABASE_NAME" : "flask",
+    "CHARSET" : "utf8"
 }
 
 # DATABASE URL
@@ -22,5 +22,3 @@ SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}/{}?charset={}".format(
     DATABASE_CONFIG["DATABASE_NAME"], 
     DATABASE_CONFIG["CHARSET"]
 )
-
-SQLALCHEMY_TRACK_MODIFICATIONS = False
