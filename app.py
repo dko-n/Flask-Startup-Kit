@@ -4,12 +4,13 @@ from flask import Flask, session, flash, render_template, abort, request, redire
 from jinja2 import TemplateNotFound
 import sqlalchemy
 from database import Database, URL
+from config import SECRET_KEY
 
 db = Database(URL)
 db.setup()
 
 app = Flask(__name__)
-app.secret_key = "secret key"
+app.secret_key = SECRET_KEY
 
 @app.route('/', defaults={'page': 'index'})
 def index(page):
