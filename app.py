@@ -5,6 +5,7 @@
 '''
 
 import sys
+from datetime import timedelta
 import flask
 from flask import Flask, session, flash, render_template, abort, request, redirect, url_for
 from jinja2 import TemplateNotFound
@@ -18,12 +19,16 @@ db = Database(URL)
 db.setup()
 
 app = Flask(__name__)
-app.secret_key = SECRET_KEY
+app.config.update(
+    DEBUG=True,
+    TESTING=True,
+    SECRET_KEY=SECRET_KEY,
+    PERMANENT_SESSION_LIFETIME=timedelta(days=31)
+)
 
 @app.route('/', defaults={'page': 'index'})
 def index(page):
     username = session["username"] if "username" in session else None
-
     try:
         test_recode = db.session.query(db.model_class["Test"]).filter(db.model_class["Test"].id == "1").first()
         user_recode = db.session.query(db.model_class["User"]).filter(db.model_class["User"].name == "Panda").first()
@@ -104,7 +109,7 @@ def signup(page):
 
     else:
         flash("Invalid Inputs")
-        return redirect(url_for('signUp'))        
+        return redirect(url_for('signup'))        
 
 @app.route('/signout', methods=["GET"])
 def signout():

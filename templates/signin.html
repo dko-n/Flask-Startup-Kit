@@ -49,6 +49,10 @@
     <div class="container">
         <h1 class="display-">Login Form</h1>
         <form class="form-group" action="{{ url_for('signin') }}" method="POST">
+        {{ form.csrf_token }}
+        {% if form.csrf_token.errors %}
+            <div class="warning">You have submitted an invalid CSRF token</div>
+        {% endif %}
         {{ form.name.label }}
         {{ form.name(class_="form-control") }}
         {{ form.password.label }}

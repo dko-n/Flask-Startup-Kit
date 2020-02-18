@@ -49,6 +49,7 @@
     <div class="container">
         <h1 class="display-">SignUp Form</h1>
         <form class="form-group" action="{{ url_for('signup') }}" method="POST">
+        {{ form.csrf_token }}
         {{ form.name.label }}
         {{ form.name(class_="form-control") }}
         {{ form.password.label }}
