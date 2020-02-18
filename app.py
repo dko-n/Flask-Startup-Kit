@@ -12,7 +12,7 @@ import sqlalchemy
 from database import Database, URL
 from config import SECRET_KEY
 
-from forms import SignInForms
+from forms import SignInForms, SignUpForms
 
 db = Database(URL)
 db.setup()
@@ -79,14 +79,15 @@ def signin(page):
 
 @app.route('/signup', methods=["GET", "POST"], defaults={'page': 'signup'})
 def signup(page):
+    form = SignUpForms.SignUpForm(request.form)
     if request.method == "GET":
         try:
             username = session["username"] if "username" in session else None
-            return render_template('{}.html'.format(page), username=username)
+            return render_template('{}.html'.format(page), username=username, form=form)
         except TemplateNotFound:
             abort(404)
 
-    elif request.method == "POST":
+    elif request.method == "POST" and form.validate():
         name = request.form['name']
         password = request.form['password']
         is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
@@ -99,7 +100,11 @@ def signup(page):
             return redirect(url_for('index'))
 
         flash("User name already exists")
-        return redirect(url_for('signup'))      
+        return redirect(url_for('signup'))
+
+    else:
+        flash("Invalid Inputs")
+        return redirect(url_for('signUp'))        
 
 @app.route('/signout', methods=["GET"])
 def signout():
