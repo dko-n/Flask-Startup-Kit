@@ -5,6 +5,7 @@
 '''
 
 import sys
+from datetime import timedelta
 import flask
 from flask import Flask, session, flash, render_template, abort, request, redirect, url_for
 from jinja2 import TemplateNotFound
@@ -12,16 +13,22 @@ import sqlalchemy
 from database import Database, URL
 from config import SECRET_KEY
 
+from forms import SignInForms, SignUpForms
+
 db = Database(URL)
 db.setup()
 
 app = Flask(__name__)
-app.secret_key = SECRET_KEY
+app.config.update(
+    DEBUG=True,
+    TESTING=True,
+    SECRET_KEY=SECRET_KEY,
+    PERMANENT_SESSION_LIFETIME=timedelta(days=31)
+)
 
 @app.route('/', defaults={'page': 'index'})
 def index(page):
     username = session["username"] if "username" in session else None
-
     try:
         test_recode = db.session.query(db.model_class["Test"]).filter(db.model_class["Test"].id == "1").first()
         user_recode = db.session.query(db.model_class["User"]).filter(db.model_class["User"].name == "Panda").first()
@@ -51,14 +58,15 @@ def about(page):
 
 @app.route('/signin', methods=["GET", "POST"], defaults={'page': 'signin'})
 def signin(page):
+    form = SignInForms.SignInForm(request.form)
     if request.method == "GET":
         username = session["username"] if "username" in session else None
         try:
-            return render_template('{}.html'.format(page), username=username)
+            return render_template('{}.html'.format(page), username=username, form=form)
         except TemplateNotFound:
             abort(404)
 
-    elif request.method == "POST":
+    elif request.method == "POST" and form.validate():
         name = request.form['name']
         password = request.form['password']
         is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
@@ -70,16 +78,21 @@ def signin(page):
         session["username"] = name
         return redirect(url_for('index'))
 
+    else:
+        flash("Invalid Inputs")
+        return redirect(url_for('signin'))
+
 @app.route('/signup', methods=["GET", "POST"], defaults={'page': 'signup'})
 def signup(page):
+    form = SignUpForms.SignUpForm(request.form)
     if request.method == "GET":
         try:
             username = session["username"] if "username" in session else None
-            return render_template('{}.html'.format(page), username=username)
+            return render_template('{}.html'.format(page), username=username, form=form)
         except TemplateNotFound:
             abort(404)
 
-    elif request.method == "POST":
+    elif request.method == "POST" and form.validate():
         name = request.form['name']
         password = request.form['password']
         is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
@@ -92,7 +105,11 @@ def signup(page):
             return redirect(url_for('index'))
 
         flash("User name already exists")
-        return redirect(url_for('signup'))      
+        return redirect(url_for('signup'))
+
+    else:
+        flash("Invalid Inputs")
+        return redirect(url_for('signup'))        
 
 @app.route('/signout', methods=["GET"])
 def signout():
