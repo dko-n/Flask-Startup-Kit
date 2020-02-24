@@ -40,5 +40,5 @@ Flaskは自由な構成が可能なWeb Application Frameworkなので、PJを始
 おんてゃん(⋈◍＞◡＜◍)。✧♡
 
 # 📖References
-* https://a2c.bitbucket.io/flask/
-* https://docs.sqlalchemy.org/en/13/index.html
+* [Flask公式](https://a2c.bitbucket.io/flask/)
+* [SQLAlchemy公式](https://docs.sqlalchemy.org/en/13/index.html)
