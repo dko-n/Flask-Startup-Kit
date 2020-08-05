@@ -8,7 +8,7 @@ Flaskは自由な構成が可能なWeb Application Frameworkなので、PJを始
 * 使用したライブラリはrequirements.txtに記載。
 
 # 👩‍💻Setup
-1. git clone git@github.com:dko-n/Flask-Startup-Kit.git
+1. git clone git@github.com:obeke4353/Flask-Startup-Kit.git
 2. Databaseの準備。
 3. config.py内のDATABASE_CONFIG定数を設定したDatabaseに合わせて書き換える。
 
@@ -37,7 +37,7 @@ Flaskは自由な構成が可能なWeb Application Frameworkなので、PJを始
 ![loggedin](https://user-images.githubusercontent.com/13768156/74446482-4b748600-4ebb-11ea-93c4-863786fd1a89.png)
 
 # 📝Author
-おんてゃん(⋈◍＞◡＜◍)。✧♡
+おべけ！？
 
 # 📖References
 * [Flask公式](https://a2c.bitbucket.io/flask/)
