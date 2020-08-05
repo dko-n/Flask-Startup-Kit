@@ -5,7 +5,7 @@ Flaskは自由な構成が可能なWeb Application Frameworkなので、PJを始
 
 # 🖥Dependency
 * Python3.3 >=
-* 使用したライブラリはrequirements.txtに記載。
+* 使用したライブラリはrequirements.txtに記載。（**pip(3) install -r requirements.txt**でライブラリインストール）
 
 # 👩‍💻Setup
 1. git clone git@github.com:obeke4353/Flask-Startup-Kit.git
