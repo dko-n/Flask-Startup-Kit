@@ -11,7 +11,7 @@ from flask import Flask, session, flash, render_template, abort, request, redire
 from jinja2 import TemplateNotFound
 import sqlalchemy
 from database import Database, URL
-from config import SECRET_KEY
+from config import configuration
 
 from forms import SignInForms, SignUpForms
 
@@ -19,12 +19,9 @@ db = Database(URL)
 db.setup()
 
 app = Flask(__name__)
-app.config.update(
-    DEBUG=True,
-    TESTING=True,
-    SECRET_KEY=SECRET_KEY,
-    PERMANENT_SESSION_LIFETIME=timedelta(days=31)
-)
+
+config = configuration(production=False)
+app.config.update(config)
 
 @app.route('/', defaults={'page': 'index'})
 def index(page):
@@ -117,5 +114,4 @@ def signout():
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run(host="127.0.0.1", port=5001)
+    app.run()
