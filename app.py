@@ -100,7 +100,7 @@ def signup(page):
         try:
             is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
         except sqlalchemy.exc.OperationalError as e:
-            abort(500)    
+            abort(500)
 
         if is_user is None:
             user = db.model_class["User"](name, password)
@@ -120,6 +120,16 @@ def signup(page):
 def signout():
     session.pop('username', None)
     return redirect(url_for('index'))
+
+# 共通エラーページ
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error/404.html', code=404, message="Page Not Found", error_message="お探しのページは存在しません。")
+
+# 共通エラーページ
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('error/500.html', code=500, message="Internal Server Error", error_message="エラーが発生しました。")
 
 if __name__ == "__main__":
     app.run()
