@@ -66,7 +66,11 @@ def signin(page):
     elif request.method == "POST" and form.validate():
         name = request.form['name']
         password = request.form['password']
-        is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
+        
+        try:
+            is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
+        except sqlalchemy.exc.OperationalError as e:
+            abort(500)            
 
         if is_user is None:
             flash("Invalid credentials")
@@ -92,7 +96,11 @@ def signup(page):
     elif request.method == "POST" and form.validate():
         name = request.form['name']
         password = request.form['password']
-        is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
+
+        try:
+            is_user = db.session.query(db.model_class["User"]).filter(sqlalchemy.and_(db.model_class["User"].name == name, db.model_class["User"].password == password)).first()
+        except sqlalchemy.exc.OperationalError as e:
+            abort(500)    
 
         if is_user is None:
             user = db.model_class["User"](name, password)
